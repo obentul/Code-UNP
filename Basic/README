@@ -4,6 +4,7 @@ tcp.txt : TCP协议栈的一些要点
 BasicUse&Api.txt : 网络编程的基础知识和要点
 ComminUse&Api.txt : 网络编程的通用知识和要点
 AdvancedUse&Api.txt : 一些高级技巧
+SocketOpt.txt : socket选项
 
 C1.c  S1.c : BasicUse.txt中的#6实验
 sockopt.c  : 查询socket选项的demo/lib
