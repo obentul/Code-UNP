@@ -1,0 +1,3 @@
+#1 - syslogd使用的socket就是UNIX域socket，速度快
+
+#2 - 

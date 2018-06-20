@@ -1,8 +1,12 @@
 0.txt : TCP/IP的一些要点
 tcp.txt : TCP协议栈的一些要点
 
-BasicUse.txt : 网络编程的基础知识和要点
-ComminUse.txt : 网络编程的通用知识和要点
+BasicUse&Api.txt : 网络编程的基础知识和要点
+ComminUse&Api.txt : 网络编程的通用知识和要点
+AdvancedUse&Api.txt : 一些高级技巧
 
 C1.c  S1.c : BasicUse.txt中的#6实验
+sockopt.c  : 查询socket选项的demo/lib
+ReuseC.c  ReuseS.c  :  SO_REUSEADDR和SO_REUSEPORT的实验及结果说明
+
 

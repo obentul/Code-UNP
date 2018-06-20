@@ -1,0 +1,44 @@
+#1 - 调整socket选项的API有：getsockopt 、 setsockopt 、 fcntl 、 ioctl
+	前3个用的多
+
+#2 - getsockopt和setsockopt要求套接字必须是打开状态的，这两个函数能修改包括 应用层、TCP、IPv4、IPv6、ICMP以及SCTP的选项。
+     可以说是内核提供的，用于管理socket从上到下所有内容的最全的API。
+
+	可以创建一个DEMO/lib，用来罗列当前创建的socket的所有配置信息，见sockopt.c
+
+
+#3 - SO_KEEPALIVE  :  如果“两小时内”在当前套接字链接上没有任何数据交换，那么其中一端的TCP会发送一个探测报文。
+			1）如果对端收到探测报文并回馈ACK，那么网络被认为是通畅的
+			2）如果对端收到探测报文并回馈RST，那么表明回RST的一端已经崩溃了，当前链路被关闭
+			3）如果没反应，那么继续发8个探测报文，两两间隔75s，发完还没响应，则放弃
+	ps：这里的两小时是可以改的，但是是TCP层面的
+
+#4 - SO_LINGER  :  
+
+#5 - SO_RCVBUF 和 SO_SNDBUF  :  这两个值必须在connect(C端)和listen(S端)之前设置
+				这两个值一般是MSS的4倍，默认是8192(这样看，高并发服务器对于内存的要求还是蛮高的)，这个值一般指发送缓冲区(发送端)
+				和接受缓冲区(接收端)大小之和
+
+#6 - SO_RCVATLOW 和 SO_SNDATLOW   :   
+
+#7 - SO_RCVTIMEO 和 SO_SNDTIMEO   :   为接受和发送设置超时值
+
+#8 - SO_REUSEADDR  : 如下四个场景中会用到这个选项：
+			1）IP+PORT复用
+				父进程fork子进程为客户端服务，然后自己退出，此时已连接套接字依然使用的是监听套接字的PORT，如果再次启动原服务，就会
+				提示地址已经被占用，此时就需要在服务端代码的socket和bind之间使用setsockopt函数打开SO_REUSEADDR选项即可
+			2）PORT复用
+				如果针对6666端口，想启动多个进程同时监听，那么可以打开这个选项,但是这些进程的IP必须是不一样的，即绑到不同的网卡上
+				（*）(多个进程监听同一个IP+PORT，这种事情在TCP中是完全不允许的)
+			3）
+     SO_REUSEPORT  :  
+
+
+	注：好像实验结果和描述不符合，需要做实验研究，见ReuseC.c和ReuseS.c
+
+
+
+
+
+
+
