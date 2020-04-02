@@ -1,0 +1,4 @@
+	//struct timeb rawtime;
+	//ftime(&rawtime);
+	//DWORD time = rawtime.time * 1000 + rawtime.millitm;
+	//LOG(INFO) << "OnPollThreadStep->" << time;
